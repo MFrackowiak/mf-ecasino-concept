@@ -2,6 +2,7 @@ from django.views.generic import TemplateView, FormView
 from .forms import DepositForm
 from .models import Wallet
 from django.urls import reverse_lazy
+from bonus.service import bonus_wallet_summary
 
 
 class WalletsList(TemplateView):
@@ -11,7 +12,7 @@ class WalletsList(TemplateView):
         return dict(
             super().get_context_data(**kwargs),
             wallets=self.request.user.player.wallet_set.all(),
-            bonus_wallet=dict(amount=0),
+            bonus_wallet=bonus_wallet_summary(self.request.user),
         )
 
 

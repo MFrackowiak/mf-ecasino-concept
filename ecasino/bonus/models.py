@@ -1,12 +1,11 @@
+from django.core.validators import MinValueValidator, MaxValueValidator
 from django.db import models
 from django.utils import timezone
-from django.core.validators import MinValueValidator, MaxValueValidator
-from common.fields import MoneyField
 
+from common.fields import MoneyField
 
 BONUS_ON_LOGIN = 1
 BONUS_ON_DEPOSIT = 2
-
 
 BONUS_TYPE_CHOICES = (
     (BONUS_ON_LOGIN, 'Bonus awarded on login to the application.'),
@@ -24,6 +23,17 @@ class Bonus(models.Model):
     min_time_between_award = models.DurationField(null=True)
     min_deposit_amount = MoneyField(default=0)
 
+    def can_be_awarded_to(self, user):
+        return not (
+                self.min_time_between_award and
+                AwardedBonus.objects.filter(
+                    player=user,
+                    bonus=self,
+                    awarded__gte=timezone.now() -
+                                 self.min_time_between_award
+                ).exists()
+        )
+
 
 class AwardedBonus(models.Model):
     bonus = models.ForeignKey(Bonus, on_delete=models.PROTECT)
@@ -31,3 +41,6 @@ class AwardedBonus(models.Model):
     awarded = models.DateTimeField(default=timezone.now)
     money_spent = MoneyField(default=0)
     amount = MoneyField()
+    awarded_for = models.ForeignKey('wallet.Deposit', null=True,
+                                    on_delete=models.PROTECT)
+    cashed_in = models.BooleanField(default=False)
