@@ -1,0 +1,22 @@
+{% extends 'base.html' %}
+{% block body %}
+  <div class="ui middle aligned center aligned grid">
+    <div class="column">
+      <form class="ui large form{% if form.errors %} error{% endif %}"
+            action="." method="post">
+        {% include 'common/include/form_errors.html' with errors=forms.errors.non_field_errors %}
+        <div class="ui stacked segment">
+          {% include 'common/include/form_errors.html' with errors=forms.errors.amount %}
+          <div class="field">
+            <div class="ui left icon input">
+              <i class="money alternate icon"></i>
+              <input type="number" step="0.01" name="amount" placeholder="Amount">
+            </div>
+          </div>
+          <button class="ui fluid large submit button">Add funds</button>
+        </div>
+        {% csrf_token %}
+      </form>
+    </div>
+  </div>
+{% endblock body %}

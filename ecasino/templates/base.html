@@ -1,0 +1,53 @@
+{% load static %}
+<html>
+<head>
+  <title>{% firstof page_title "eCasino" %}</title>
+  <link rel="stylesheet" type="text/css" href="{% static 'semantic.min.css' %}">
+  <script
+      src="https://code.jquery.com/jquery-3.1.1.min.js"
+      integrity="sha256-hVVnYaiADRTO2PzUGmuLJr8BLUSjGIZsDYGmIJLv2b8="
+      crossorigin="anonymous"></script>
+  <script src="{% static 'semantic.min.js' %}"></script>
+  {% block head %}{% endblock head %}
+</head>
+<body>
+<div class="ui container stackable menu">
+  <div class="item header">
+    <a href="{% url 'common:landing' %}">
+      eCasino
+    </a>
+  </div>
+  <a href="" class="item active">
+    Something
+  </a>
+  <div class="right menu">
+    {% if request.user.is_authenticated %}
+      <div class="ui dropdown item" tabindex="0">
+        User
+        <i class="dropdown icon"></i>
+        <div class="menu transition hidden" tabindex="-1">
+          <a href="{% url 'wallet:list' %}" class="item">
+            My wallets
+          </a>
+          <a class="item" href="{% url 'common:logout' %}">
+            Sign Out
+          </a>
+        </div>
+      </div>
+    {% else %}
+      <div class="item">
+        <a href="{% url 'common:login' %}">Log in</a> or <a
+          href="{% url 'player:signup' %}">Sign up</a>
+      </div>
+    {% endif %}
+  </div>
+</div>
+
+<div class="ui container">
+  {% block body %}{% endblock %}
+  <script>
+    $('.dropdown').dropdown()
+  </script>
+</div>
+</body>
+</html>

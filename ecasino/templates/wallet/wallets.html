@@ -1,0 +1,32 @@
+{% extends 'base.html' %}
+{% block body %}
+<div class="ui cards">
+  {% for wallet in wallets %}
+  <div class="card">
+    <div class="content">
+      <div class="header">{{ wallet.amount }}</div>
+      <div class="description">
+        {{ wallet.currency }}
+      </div>
+    </div>
+    <a class="ui teal bottom attached button"
+       href="{% url 'wallet:deposit' wallet.id %}">
+      <i class="money bill alternate icon"></i>
+      Add Funds
+    </a>
+  </div>
+  {% endfor %}
+  <div class="card">
+    <div class="content">
+      <div class="header">{{ bonus_wallet.amount }}</div>
+      <div class="description">
+        Bonus Money EUR
+      </div>
+    </div>
+    <a class="ui yellow bottom attached button" href="#">
+      <i class="money bill alternate outline icon"></i>
+      Cash In
+    </a>
+  </div>
+</div>
+{% endblock body %}
