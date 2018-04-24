@@ -3,6 +3,7 @@ from django.db.models.signals import post_save
 from django.dispatch import receiver
 
 from wallet.models import Deposit
+from wallet.service import add_to_wallet
 from .models import Bonus, AwardedBonus, BONUS_ON_LOGIN, BONUS_ON_DEPOSIT
 
 
@@ -19,6 +20,9 @@ def award_log_in_bonus(sender, request, user, **_):
                     bonus=login_bonus,
                     amount=login_bonus.bonus_amount,
                 )
+                if login_bonus.awards_real_money:
+                    add_to_wallet(user.player, login_bonus.currency,
+                                  login_bonus.bonus_amount)
 
 
 @receiver(post_save, sender=Deposit)
@@ -37,3 +41,6 @@ def award_deposit_bonus(sender, instance, created, **_):
                     amount=deposit_bonus.bonus_amount,
                     awarded_for=instance,
                 )
+                if deposit_bonus.awards_real_money:
+                    add_to_wallet(player, deposit_bonus.currency,
+                                  deposit_bonus.bonus_amount)

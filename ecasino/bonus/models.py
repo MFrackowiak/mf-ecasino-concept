@@ -22,6 +22,8 @@ class Bonus(models.Model):
     )
     min_time_between_award = models.DurationField(null=True)
     min_deposit_amount = MoneyField(default=0)
+    awards_real_money = models.BooleanField(default=False)
+    currency = models.CharField(max_length=3, default='EUR')
 
     def can_be_awarded_to(self, user):
         return not (
@@ -39,8 +41,13 @@ class AwardedBonus(models.Model):
     bonus = models.ForeignKey(Bonus, on_delete=models.PROTECT)
     player = models.ForeignKey('player.Player', on_delete=models.PROTECT)
     awarded = models.DateTimeField(default=timezone.now)
-    money_spent = MoneyField(default=0)
     amount = MoneyField()
     awarded_for = models.ForeignKey('wallet.Deposit', null=True,
                                     on_delete=models.PROTECT)
     cashed_in = models.BooleanField(default=False)
+
+    def can_be_cashed_in(self):
+        if self.cashed_in or self.bonus.awards_real_money:
+            return False
+        return self.amount * self.bonus.wagering_requirement <= \
+            self.player.money_spent_toward_bonus

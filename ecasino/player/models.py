@@ -1,7 +1,6 @@
-from django.db import models
-from django.contrib.auth import get_user_model
+from common.fields import MoneyField
 from common.models import CasinoUser
 
 
 class Player(CasinoUser):
-    pass
+    money_spent_toward_bonus = MoneyField(default=0)

@@ -89,8 +89,10 @@ WSGI_APPLICATION = 'ecasino.wsgi.application'
 
 DATABASES = {
     'default': {
-        'ENGINE': 'django.db.backends.sqlite3',
-        'NAME': os.path.join(BASE_DIR, 'db.sqlite3'),
+        'ENGINE': 'django.db.backends.postgresql',
+        'NAME': 'ecasino',
+        'PASSWORD': 'ecasino',
+        'USER': 'ecasino',
     }
 }
 
@@ -114,7 +116,7 @@ AUTH_PASSWORD_VALIDATORS = [
 ]
 
 AUTH_USER_MODEL = 'common.CasinoUser'
-LOGIN_REDIRECT = 'common:landing'
+LOGIN_REDIRECT_URL = 'common:landing'
 
 
 # Internationalization
