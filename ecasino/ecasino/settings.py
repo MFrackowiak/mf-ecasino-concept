@@ -114,6 +114,7 @@ AUTH_PASSWORD_VALIDATORS = [
 ]
 
 AUTH_USER_MODEL = 'common.CasinoUser'
+LOGIN_REDIRECT = 'common:landing'
 
 
 # Internationalization

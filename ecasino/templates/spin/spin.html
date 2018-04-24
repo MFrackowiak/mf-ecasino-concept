@@ -1,0 +1,30 @@
+{% extends 'base.html' %}
+{% block body %}
+  <div class="ui middle aligned center aligned grid">
+    <div class="column">
+      {% if error %}
+        <div class="ui error message">
+          {{ message }}
+        </div>
+      {% endif %}
+      {% if game %}
+        {% if game.won %}
+          <div class="ui message {{ game.won|yesno:"success,warning" }}">
+            Congratulations, you won! Why not try again?
+          </div>
+        {% else %}
+          <div class="ui message warning">
+            Not enough luck this time - try again.
+          </div>
+        {% endif %}
+      {% endif %}
+      <div>
+
+      </div>
+      <form class="ui large form" action="." method="post">
+        <button class="ui fluid orange large submit button">SPIN</button>
+        {% csrf_token %}
+      </form>
+    </div>
+  </div>
+{% endblock body %}

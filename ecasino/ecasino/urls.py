@@ -22,5 +22,6 @@ urlpatterns = [
     path('', include('common.urls', namespace='common')),
     path('wallet/', include('wallet.urls', namespace='wallet')),
     path('player/', include('player.urls', namespace='player')),
+    path('spin/', include('spin.urls', namespace='spin')),
     re_path('^__debug__/', include(debug_toolbar.urls)),
 ]
