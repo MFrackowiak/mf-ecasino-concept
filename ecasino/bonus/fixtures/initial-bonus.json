@@ -1,0 +1,27 @@
+[
+  {
+    "model": "bonus.Bonus",
+    "pk": 1,
+    "fields": {
+      "bonus_type": 1,
+      "bonus_amount": 100,
+      "is_active": true,
+      "wagering_requirement": 20,
+      "awards_real_money": true,
+      "currency": "EUR"
+    }
+  },
+  {
+    "model": "bonus.Bonus",
+    "pk": 2,
+    "fields": {
+      "bonus_type": 2,
+      "bonus_amount": 20,
+      "is_active": true,
+      "wagering_requirement": 20,
+      "awards_real_money": false,
+      "currency": "EUR",
+      "min_deposit_amount": 100
+    }
+  }
+]

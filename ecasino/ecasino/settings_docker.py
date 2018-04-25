@@ -9,3 +9,5 @@ DATABASES = {
         'HOST': 'postgres',
     }
 }
+
+STATIC_ROOT = '/static'

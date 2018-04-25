@@ -1,3 +1,5 @@
+from datetime import timedelta
+
 from django.core.validators import MinValueValidator, MaxValueValidator
 from django.db import models
 from django.utils import timezone
@@ -20,7 +22,8 @@ class Bonus(models.Model):
     wagering_requirement = models.IntegerField(
         validators=(MinValueValidator(1), MaxValueValidator(100)),
     )
-    min_time_between_award = models.DurationField(null=True)
+    min_time_between_award = models.DurationField(null=True, blank=True,
+                                                  default=timedelta(seconds=0))
     min_deposit_amount = MoneyField(default=0)
     awards_real_money = models.BooleanField(default=False)
     currency = models.CharField(max_length=3, default='EUR')

@@ -10,13 +10,21 @@ Python 3.6.4
 2. Activate it (`source venv/bin/activate`)
 3. Install requirements (`pip install -r requirements.txt`)
 4. Create and configure role / db in postgres (db:`ecasino`, `ecasino:ecasino`)
-4. Go to app directory (`cd ecasino`)
-5. Run migrations (`python manage.py migrate`)
-6. Run server (`python manage.py runserver`)
+5. Go to app directory (`cd ecasino`)
+6. Run migrations (`python manage.py migrate`)
+7. Load default bonuses: `python manage.py loaddata initial-bonus.json`
+8. Create superuser account to access `/admin` interface: `python manage.py createsuperuser`
+9. Run server (`python manage.py runserver`)
+10. Access server on `http://localhost:8000` and admin on 'http://localhost:8000/admin'
 
 ## Container setup
 
-\#TODO
+1. Build app container: `docker-compose build`
+2. Run containers: `docker-compose up`
+3. If required, in separate terminal:
+    - load fixtures: `docker exec -it mfecasinoconcept_web_1 python manage.py loaddata initial-bonus.json`
+    - create superuser: `docker exec -it mfecasinoconcept_web_1 python manage.py createsuperuser`
+4. Access server on `http://localhost:8000` and admin on 'http://localhost:8000/admin'
 
 ## Additional design assumptions
 

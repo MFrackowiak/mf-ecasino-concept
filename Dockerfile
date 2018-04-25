@@ -13,7 +13,7 @@ COPY ./ecasino $APP_DIR/
 
 RUN mkdir -p $APP_DIR/var/log
 
-RUN python manage.py collectstatic -y
+RUN python manage.py collectstatic --noinput --settings ecasino.settings_docker
 
 ENTRYPOINT python manage.py migrate && \
-    gunicorn app.wsgi:application --workers 3 --timeout 120 --bind :8000
+    gunicorn ecasino.wsgi:application --workers 3 --timeout 120 --bind :8000
