@@ -50,4 +50,4 @@ class AwardedBonus(models.Model):
         if self.cashed_in or self.bonus.awards_real_money:
             return False
         return self.amount * self.bonus.wagering_requirement <= \
-            self.player.money_spent_toward_bonus
+               self.player.money_spent_toward_bonus

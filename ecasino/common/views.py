@@ -1,6 +1,6 @@
-from django.views.generic import TemplateView
 from django.contrib.auth.views import LogoutView, LoginView
 from django.urls import reverse_lazy
+from django.views.generic import TemplateView
 
 
 class LandingView(TemplateView):

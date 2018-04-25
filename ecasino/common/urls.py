@@ -1,7 +1,7 @@
-from django.urls import path
-from .views import LandingView, CasinoLogoutView
 from django.contrib.auth.views import LoginView
+from django.urls import path
 
+from .views import LandingView, CasinoLogoutView
 
 app_name = 'common'
 urlpatterns = [

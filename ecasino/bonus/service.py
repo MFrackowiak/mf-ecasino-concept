@@ -1,7 +1,8 @@
-from .models import AwardedBonus
-from django.db.models import Sum, F, ExpressionWrapper, DecimalField
 from django.db import transaction
+from django.db.models import Sum, F, ExpressionWrapper, DecimalField
+
 from wallet.service import add_to_wallet
+from .models import AwardedBonus
 
 
 def bonus_wallet_summary(player):

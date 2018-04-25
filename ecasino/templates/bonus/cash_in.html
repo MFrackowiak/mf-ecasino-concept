@@ -1,0 +1,23 @@
+{% extends 'base.html' %}
+{% block body %}
+  <div class="ui cards">
+    {% for bonus in awarded_cashable_wallets %}
+      <div class="card">
+        <div class="content">
+          <div class="header">{{ bonus.amount }}</div>
+          <div class="description">
+            {{ bonus.bonus.currency }}
+          </div>
+        </div>
+        <form method="post" style="display: inline">
+          {% csrf_token %}
+          <input type="hidden" name="bonus" value="{{ bonus.id }}">
+          <button class="ui yellow bottom attached button">
+            <i class="money bill alternate icon"></i>
+            Cash In
+          </button>
+        </form>
+      </div>
+    {% endfor %}
+  </div>
+{% endblock body %}

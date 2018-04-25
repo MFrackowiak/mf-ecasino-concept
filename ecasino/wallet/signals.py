@@ -1,6 +1,7 @@
-from player.models import Player
 from django.db.models.signals import post_save
 from django.dispatch import receiver
+
+from player.models import Player
 from .models import Wallet
 
 

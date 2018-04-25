@@ -1,0 +1,20 @@
+version: "2"
+
+services:
+  postgres:
+    image: postgres:10.3
+    environment:
+      POSTGRES_PASSWORD: ecasino
+      POSTGRES_USER: ecasino
+      POSTGRES_DB: ecasino
+    expose:
+      - "5432"
+    restart: on-failure
+
+  web:
+    build: .
+    environment:
+      DJANGO_SETTINGS_MODULE: ecasino.settings_docker
+    ports:
+      - "8000:8000"
+    restart: on-failure

@@ -1,4 +1,3 @@
-from collections import namedtuple
 from random import random
 
 from django.db import transaction

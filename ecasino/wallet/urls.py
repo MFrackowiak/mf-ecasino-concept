@@ -1,6 +1,6 @@
 from django.urls import path
-from .views import WalletsList, DepositToWallet
 
+from .views import WalletsList, DepositToWallet
 
 app_name = 'wallet'
 urlpatterns = [
