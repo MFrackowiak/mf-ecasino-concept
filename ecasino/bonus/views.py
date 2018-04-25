@@ -1,9 +1,12 @@
+from django.utils.decorators import method_decorator
 from django.views.generic import TemplateView
 
+from common.decorators import player_required
 from .models import AwardedBonus
 from .service import cash_in_bonus, awarded_bonuses_available_for_cash_in
 
 
+@method_decorator(player_required, 'dispatch')
 class BonusCashInView(TemplateView):
     template_name = 'bonus/cash_in.html'
 

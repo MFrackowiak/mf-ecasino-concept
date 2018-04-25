@@ -1,3 +1,5 @@
+from decimal import Decimal
+
 from django.db import transaction
 from django.db.models import Sum, F, ExpressionWrapper, DecimalField
 
@@ -13,7 +15,7 @@ def bonus_wallet_summary(player):
             bonus__awards_real_money=False,
         ).aggregate(
             s=Sum('amount'),
-        )['s'] or '0.00',
+        )['s'] or Decimal('0.00'),
     )
 
 

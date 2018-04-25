@@ -1,9 +1,12 @@
 from django.http import HttpResponseBadRequest
+from django.utils.decorators import method_decorator
 from django.views.generic import TemplateView
 
+from common.decorators import player_required
 from .service import SpinGameError, play_spin
 
 
+@method_decorator(player_required, 'dispatch')
 class PlaySpinsView(TemplateView):
     template_name = 'spin/spin.html'
 

@@ -1,4 +1,3 @@
-from django.contrib.auth.decorators import login_required
 from django.http import HttpResponseBadRequest
 from django.urls import reverse_lazy
 from django.utils.decorators import method_decorator
@@ -6,11 +5,12 @@ from django.views.generic import TemplateView, FormView
 
 from bonus.service import bonus_wallet_summary, \
     awarded_bonuses_available_for_cash_in
+from common.decorators import player_required
 from .forms import DepositForm
 from .models import Wallet
 
 
-@method_decorator(login_required, name='dispatch')
+@method_decorator(player_required, name='dispatch')
 class WalletsList(TemplateView):
     template_name = 'wallet/wallets.html'
 
@@ -29,7 +29,7 @@ class WalletsList(TemplateView):
         )
 
 
-@method_decorator(login_required, name='dispatch')
+@method_decorator(player_required, name='dispatch')
 class DepositToWallet(FormView):
     form_class = DepositForm
     template_name = 'wallet/deposit.html'
