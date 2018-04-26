@@ -4,6 +4,15 @@
 
 Python 3.6.4
 
+## Building static assets (`semantic`)
+
+1. Go to ecasino directory (`cd ecasino`)
+2. Run `npm i`, use default semantic settings
+3. Go to `semantic` directory (`cd semantic`)
+4. Build assets:
+    - if you have globally installed gulp: `gulp build`
+    - else run `../node_modules/gulp/bin/gulp.js build`
+
 ## Manual setup
 
 1. Create virtualenv (`virutalenv venv` / `python -m virutalenv venv`)
